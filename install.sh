@@ -1,36 +1,103 @@
-#!/bin/sh
+#!/bin/bash
 
-echo "Setting up your Mac..."
+echo 'Setting up your Mac...'
 
-# Check for Oh My Zsh and install if we don't have it
-if test ! $(which omz); then
-  /bin/sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/HEAD/tools/install.sh)"
-fi
+# Hide "last login" line when starting a new terminal session
+touch $HOME/.hushlogin
 
-# Check for Homebrew and install if we don't have it
-if test ! $(which brew); then
-  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-fi
+# Add global gitignore
+ln -s $HOME/.dotfiles/shell/.gitignore_global $HOME/.gitignore_global
+git config --global core.excludesfile $HOME/.gitignore_global
 
-# Update Homebrew recipes
-brew update
+# Install zsh
+echo 'Install oh-my-zsh'
+echo '-----------------'
+rm -rf $HOME/.oh-my-zsh
+curl -L https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
 
-# Install all our dependencies with bundle (See Brewfile)
-brew tap homebrew/bundle
-brew bundle --file ~/.dotfiles/Brewfile
+# Symlink zsh prefs
+rm $HOME/.zshrc
+ln -s $HOME/.dotfiles/shell/.zshrc $HOME/.zshrc
 
-# Set default MySQL root password and auth type
+# Fix missing font characters (see https://github.com/robbyrussell/oh-my-zsh/issues/1906)
+cd ~/.oh-my-zsh/themes/
+git checkout d6a36b1 agnoster.zsh-theme
+
+echo 'Install homebrew'
+echo '----------------'
+echo install homebrew
+sudo rm -rf /usr/local/Cellar /usr/local/.git && brew cleanup
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+
+echo 'Install brew-cask'
+echo '-----------------'
+brew tap caskroom/cask
+brew install brew-cask
+
+echo 'Install pkg-config'
+echo '------------------'
+brew install pkg-config
+
+echo 'Install wget'
+echo '------------'
+brew install wget --overwrite
+
+echo 'Install httpie'
+echo '--------------'
+brew install httpie
+
+echo 'Install mysql'
+echo '-------------'
+brew install mysql
+brew services start mysql
+
+echo 'Configure mysql'
+echo '-------------'
 mysql -u root -e "ALTER USER root@localhost IDENTIFIED WITH mysql_native_password BY 'password'; FLUSH PRIVILEGES;"
 
-# Install global Composer packages
-/usr/local/bin/composer global require laravel/installer
+echo 'Install node'
+echo '------------'
+brew install node
 
-# Create a Sites directory
-mkdir $HOME/Sites
+echo 'Install yarn'
+echo '------------'
+brew install yarn
 
-# Clone Github repositories
-./clone.sh
+echo 'Configure npm'
+echo '-------------'
+# Create a directory for global packages and tell npm where to store globally installed packages
+mkdir "${HOME}/.npm-packages"
+npm config set prefix "${HOME}/.npm-packages"
 
-# Removes .zshrc from $HOME (if it exists) and symlinks the .zshrc file from the .dotfiles
-rm -rf $HOME/.zshrc
-ln -s $HOME/.dotfiles/.zshrc $HOME/.zshrc
+echo 'Install php'
+echo '-----------'
+brew install php@7.4
+brew install php@8.0
+
+echo 'Install composer'
+echo '----------------'
+EXPECTED_COMPOSER_CHECKSUM="$(curl https://composer.github.io/installer.sig)"
+php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+ACTUAL_COMPOSER_CHECKSUM="$(php -r "echo hash_file('sha384', 'composer-setup.php');")"
+if [ "$EXPECTED_COMPOSER_CHECKSUM" != "$ACTUAL_COMPOSER_CHECKSUM" ]
+then
+  >&2 echo 'ERROR: Invalid installer checksum'
+  rm composer-setup.php
+  exit 1
+fi
+php composer-setup.php
+rm composer-setup.php
+mv composer.phar /usr/local/bin/composer
+
+echo 'Install another applications'
+echo '------------------'
+echo 'This will take quite some time. Are you sure you want to to this? (y/n) '
+read -p 'Answer: '  reply
+
+if [[ $reply =~ ^[Yy]$ ]]
+then
+  ./app.sh
+fi
+
+echo 'All done!'
+echo 'Restart your computer to finalize the process'

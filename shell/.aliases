@@ -6,17 +6,25 @@ alias c="clear"
 
 # Directories
 alias dotfiles="cd $DOTFILES"
-alias library="cd $HOME/Library"
+alias github="cd $HOME/GitHub"
 alias sites="cd $HOME/Sites"
+
+# List all files colorized in long format
+alias l="ls -laF"
+
+# PHP
+alias cfresh="rm -rf vendor/ composer.lock && composer i"
+alias composer="php -d memory_limit=-1 /usr/local/bin/composer"
+alias switch-php74="brew unlink php && brew link --overwrite --force php@7.4"
+alias switch-php80="brew unlink php@7.4 && brew link --overwrite --force php"
+
+# CodeIgniter
+alias s="php spark serve"
 
 # Laravel
 alias a="php artisan"
 alias fresh="php artisan migrate:fresh --seed"
 alias seed="php artisan db:seed"
-
-# PHP
-alias cfresh="rm -rf vendor/ composer.lock && composer i"
-alias composer="php -d memory_limit=-1 /usr/local/bin/composer"
 
 # JS
 alias check="yarn upgrade-interactive --latest"
@@ -24,19 +32,14 @@ alias nfresh="rm -rf node_modules/ package-lock.json && yarn"
 alias watch="npm run watch"
 
 # Git
-alias gst="git status"
+alias commit="git add . && git commit -m"
 alias gb="git branch"
 alias gc="git checkout"
 alias gl="git log --oneline --decorate --color"
-alias amend="git add . && git commit --amend --no-edit"
-alias commit="git add . && git commit -m"
-alias diff="git diff"
+alias gst="git status"
 alias force="git push --force"
 alias nuke="git clean -df && git reset --hard"
-alias pop="git stash pop"
 alias pull="git pull"
 alias push="git push"
-alias resolve="git add . && git commit --no-edit"
 alias stash="git stash -u"
 alias unstage="git restore --staged ."
-alias wip="commit wip"

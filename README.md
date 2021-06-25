@@ -2,27 +2,26 @@
 
 This repository serves as my way to help me setup and maintain my Mac. It takes the effort out of installing everything manually. Everything needed to install my preferred setup of macOS is detailed in this readme. Feel free to explore, learn and copy parts for your own dotfiles. Enjoy!
 
-### Setting up your Mac
+## Getting Started
 
-If you did all of the above you may now follow these install instructions to setup a new Mac.
+You can install them by cloning the repository as `.dotfiles` in your home directory and running the bootstrap script.
 
-1. Update macOS to the latest version with the App Store
-2. [Generate a new public and private SSH key](https://docs.github.com/en/github/authenticating-to-github/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) by running:
+```bash
+git clone https://github.com/razaqultegar/dotfiles.git ~/.dotfiles
+cd .dotfiles
+./install.sh
+```
 
-   ```zsh
-   curl https://raw.githubusercontent.com/razaqultegar/dotfiles/HEAD/ssh.sh | sh -s "<your-email-address>"
-   ```
+Custom your applications bundle on `app.sh`, and run the command:
 
-3. Clone this repo to `~/.dotfiles` with:
+```bash
+./app.sh
+```
 
-    ```zsh
-    git clone git@github.com:razaqultegar/dotfiles.git ~/.dotfiles
-    ```
+## Configuration
 
-4. Run `~/.dotfiles/install.sh` to start the installation
-5. After mackup is synced with your cloud storage, restore preferences by running `mackup restore`
-6. Restart your computer to finalize the process
+Things to do to make the agnoster terminal theme work:
 
-Your Mac is now ready to use!
-
-> Note: you can use a different location than `~/.dotfiles` if you want. Just make sure you also update the reference in the [`.zshrc`](./.zshrc#L2) file.
+1. Install menlo patched font included in `.dotfiles/misc` folder or download [Menlo Powerline](https://gist.github.com/qrush/1595572/raw/Menlo-Powerline.otf).
+2. Install patched solarized theme included in same folder.
+3. Make a `.dotfiles-custom/shell/.aliases` for your personal commands.

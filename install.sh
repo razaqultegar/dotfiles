@@ -29,31 +29,10 @@ echo install homebrew
 sudo rm -rf /usr/local/Cellar /usr/local/.git && brew cleanup
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 
-echo 'Install brew-cask'
-echo '-----------------'
-brew tap caskroom/cask
-brew install brew-cask
-
-echo 'Install pkg-config'
-echo '------------------'
-brew install pkg-config
-
-echo 'Install wget'
-echo '------------'
-brew install wget --overwrite
-
-echo 'Install httpie'
-echo '--------------'
-brew install httpie
-
 echo 'Install mysql'
 echo '-------------'
 brew install mysql
 brew services start mysql
-
-echo 'Configure mysql'
-echo '-------------'
-mysql -u root -e "ALTER USER root@localhost IDENTIFIED WITH mysql_native_password BY 'password'; FLUSH PRIVILEGES;"
 
 echo 'Install node'
 echo '------------'
@@ -89,15 +68,9 @@ php composer-setup.php
 rm composer-setup.php
 mv composer.phar /usr/local/bin/composer
 
-echo 'Install another applications'
-echo '------------------'
-echo 'This will take quite some time. Are you sure you want to to this? (y/n) '
-read -p 'Answer: '  reply
-
-if [[ $reply =~ ^[Yy]$ ]]
-then
-  ./app.sh
-fi
+# Create optional directory
+mkdir "${HOME}/GitHub"
+mkdir "${HOME}/Sites"
 
 echo 'All done!'
 echo 'Restart your computer to finalize the process'

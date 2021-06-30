@@ -4,10 +4,6 @@ echo 'Install alfred'
 echo '------------------'
 brew install --cask alfred
 
-echo 'Install anydesk'
-echo '------------------'
-brew install --cask anydesk
-
 echo 'Install dropbox'
 echo '------------------'
 brew install --cask dropbox
@@ -39,10 +35,6 @@ brew install --cask tableplus
 echo 'Install telegram-desktop'
 echo '------------------'
 brew install --cask telegram-desktop
-
-echo 'Install the-unarchiver'
-echo '------------------'
-brew install --cask the-unarchiver
 
 echo 'Install visual-studio-code'
 echo '------------------'

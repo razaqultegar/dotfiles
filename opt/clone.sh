@@ -10,6 +10,8 @@ git clone git@github.com:razaqultegar/razaqultegar.com.git $HOME/GitHub/razaqult
 git clone git@github.com:razaqultegar/notebook.git $HOME/GitHub/notebook
 
 # Office
-git clone git@github.com:razaqultegar/limbodigital-site.git $HOME/GitHub/limbodigital-site.git
+git clone git@github.com:razaqultegar/limbodigital-site.git $HOME/GitHub/limbodigital-site
 git clone git@gitlab.com:biker-shop/biker-shop-server.git $HOME/Sites/biker-shop-server
 git clone git@gitlab.com:limboproject/babershop.git $HOME/Sites/babershop
+git clone git@github.com:reztocoid/rezto-frontend.git $HOME/Sites/rezto-frontend
+git clone git@github.com:reztocoid/rezto-backend.git $HOME/Sites/rezto-backend

@@ -18,11 +18,8 @@ alias composer="php -d memory_limit=-1 /usr/local/bin/composer"
 alias switch-php74="brew unlink php && brew link --overwrite --force php@7.4"
 alias switch-php80="brew unlink php@7.4 && brew link --overwrite --force php"
 
-# CodeIgniter
-alias s="php spark serve"
-
-# Laravel
-alias a="php artisan"
+alias sc="php spark serve"
+alias sl="php artisan serve"
 alias fresh="php artisan migrate:fresh --seed"
 alias seed="php artisan db:seed"
 

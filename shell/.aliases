@@ -5,7 +5,8 @@ alias reloaddns="dscacheutil -flushcache && sudo killall -HUP mDNSResponder"
 alias c="clear"
 
 # Directories
-alias dotfiles="cd $DOTFILES"
+alias dev="cd $HOME/Developments"
+alias dotfiles="cd $HOME/.dotfiles"
 alias github="cd $HOME/GitHub"
 alias sites="cd $HOME/Sites"
 

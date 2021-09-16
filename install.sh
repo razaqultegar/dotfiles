@@ -10,12 +10,14 @@ echo 'Checking oh-my-zsh'
 echo '-----------------'
 if test ! $(which omz); then
   echo 'Install oh-my-zsh'
+  echo '----------------'
   rm -rf $HOME/.oh-my-zsh
   /bin/sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/HEAD/tools/install.sh)"
 fi
 
 # Check for Homebrew and install if we don't have it
 echo 'Checking homebrew'
+echo '----------------'
 if test ! $(which brew); then
   echo 'Install homebrew'
   echo '----------------'
@@ -89,6 +91,13 @@ echo '-------------'
 mkdir "${HOME}/.npm-packages"
 npm config set prefix "${HOME}/.npm-packages"
 
+# Create a directory for global my project, this optional
+echo 'Create directory'
+echo '-------------'
+mkdir "${HOME}/Developments"
+mkdir "${HOME}/GitHub"
+mkdir "${HOME}/Sites"
+
 echo 'Install required applications'
 echo '------------------'
 echo 'This will take a long time. Are you sure you want to to this? (y/n) '
@@ -97,16 +106,6 @@ read -p 'Answer: '  reply
 if [[ $reply =~ ^[Yy]$ ]]
 then
   source ~/.dotfiles/opt/app.sh
-fi
-
-echo 'Clone required repository'
-echo '------------------'
-echo 'This will take a long time. Are you sure you want to to this? (y/n) '
-read -p 'Answer: '  reply
-
-if [[ $reply =~ ^[Yy]$ ]]
-then
-  source ~/.dotfiles/opt/clone.sh
 fi
 
 echo '++++++++++++++++++++++++++++++'

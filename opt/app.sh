@@ -1,9 +1,5 @@
 #!/bin/bash
 
-echo 'Install alfred'
-echo '------------------'
-brew install --cask alfred
-
 echo 'Install dropbox'
 echo '------------------'
 brew install --cask dropbox

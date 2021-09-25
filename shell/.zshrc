@@ -1,8 +1,6 @@
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
 
-ZSH_CUSTOM=$HOME/.dotfiles/misc
-
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
@@ -45,6 +43,15 @@ export MANPATH="${MANPATH-$(manpath)}:$NPM_PACKAGES/share/man"
 export XDEBUG_CONFIG="idekey=VSCODE"
 
 # Extra paths
+## Load Composer tools
 export PATH="$HOME/.composer/vendor/bin:$PATH"
+
+## Load Node global installed binaries
 export PATH="$HOME/.node/bin:$PATH"
+
+## Load Yarn global installed binaries
 export PATH="$HOME/.yarn/bin:$PATH"
+
+## Additional
+export PATH="/usr/local/opt/php@7.4/bin:$PATH"
+export PATH="/usr/local/opt/php@7.4/sbin:$PATH"

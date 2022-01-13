@@ -2,6 +2,8 @@
 alias dev="cd $HOME/Developments"
 alias dotfiles="cd $HOME/.dotfiles"
 alias github="cd $HOME/GitHub"
+alias personal="cd $HOME/GitHub/Personal"
+alias work="cd $HOME/GitHub/Work"
 alias sites="cd $HOME/Sites"
 
 # Shortcuts
@@ -18,8 +20,10 @@ alias cfresh="rm -rf vendor/ composer.lock && composer update && composer instal
 alias composer="php -d memory_limit=-1 /usr/local/bin/composer"
 alias switch-php74="brew unlink php && brew link --overwrite --force php@7.4"
 
-# Laravel
+# CodeIgniter
 alias sc="php spark serve"
+
+# Laravel
 alias sl="php artisan serve"
 alias fresh="php artisan migrate:fresh --seed"
 alias seed="php artisan db:seed"

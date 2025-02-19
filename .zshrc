@@ -1,20 +1,14 @@
 # Path to your dotfiles.
 export DOTFILES=$HOME/.dotfiles
 
-# Path to your oh-my-zsh configuration.
-ZSH=$HOME/.oh-my-zsh
+# Path to your oh-my-zsh installation.
+export ZSH="$HOME/.oh-my-zsh"
 
-# Hide username in prompt
-DEFAULT_USER=`whoami`
-
-# Enable completions
-autoload -Uz compinit && compinit
-
-# Set name of the theme to load.
-# Look in ~/.oh-my-zsh/themes/
-# Optionally, if you set this to "random", it'll load a random theme each
-# time that oh-my-zsh is loaded.
-ZSH_THEME=""
+# Set name of the theme to load --- if set to "random", it will
+# load a random theme each time oh-my-zsh is loaded, in which case,
+# to know which specific one was loaded, run: echo $RANDOM_THEME
+# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
+ZSH_THEME="hyperzsh"
 
 # Uncomment the following line if you want to change the command execution time
 # stamp shown in the history command output.
@@ -27,13 +21,21 @@ HIST_STAMPS="dd/mm/yyyy"
 # Would you like to use another custom folder than $ZSH/custom?
 ZSH_CUSTOM=$DOTFILES
 
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
+# Which plugins would you like to load?
+# Standard plugins can be found in $ZSH/plugins/
+# Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git)
+# Add wisely, as too many plugins slow down shell startup.
+plugins=(git zsh-autosuggestions)
 
 source $ZSH/oh-my-zsh.sh
 
 # You may need to manually set your language environment
-export LANG="en_US.UTF-8"
-export LC_ALL="en_US.UTF-8"
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+
+# Disable session restore
+unsetopt extended_history
+unsetopt hist_ignore_all_dups
+unsetopt hist_ignore_space
+unsetopt share_history
